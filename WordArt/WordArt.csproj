@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{20F84DF5-2703-4412-99E1-5E0E281E9DDC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WordArt</RootNamespace>
+    <AssemblyName>WordArt</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnimationChar.cs" />
+    <Compile Include="AnimationString.cs" />
+    <Compile Include="IObjectSafety.cs" />
+    <Compile Include="WordArtApi.cs" />
+    <Compile Include="Animation\AnimationFactory.cs" />
+    <Compile Include="Animation\AnimationType.cs" />
+    <Compile Include="Animation\AnimationUtil.cs" />
+    <Compile Include="Animation\BlackHoleAnimation.cs" />
+    <Compile Include="Animation\ColorGradientType.cs" />
+    <Compile Include="Animation\ContinuouseMovementAnimation.cs" />
+    <Compile Include="Animation\FallInTurnAnimation.cs" />
+    <Compile Include="Animation\FlipAnimation.cs" />
+    <Compile Include="Animation\FrogAnimation.cs" />
+    <Compile Include="Animation\HorizontalRotationAnimation.cs" />
+    <Compile Include="Animation\PositionAnimation.cs" />
+    <Compile Include="Animation\RepeatFallAnimation.cs" />
+    <Compile Include="Animation\RollingAnimation.cs" />
+    <Compile Include="Animation\RotateAnimation.cs" />
+    <Compile Include="Animation\RotationIntoAnimation.cs" />
+    <Compile Include="Animation\ScaleAnimation.cs" />
+    <Compile Include="Animation\ScaleToRightAnimation.cs" />
+    <Compile Include="Animation\SineZoomInOutAnimation.cs" />
+    <Compile Include="Animation\SlideInAnimation.cs" />
+    <Compile Include="Animation\StringAnimator.cs" />
+    <Compile Include="Animation\SwayAnimation.cs" />
+    <Compile Include="Animation\SwayLeftRightAnimation.cs" />
+    <Compile Include="Animation\TextAnimation.cs" />
+    <Compile Include="Animation\TextScalingAnimation.cs" />
+    <Compile Include="Animation\TopRighMoveInWithScaleAnimation.cs" />
+    <Compile Include="Animation\TopRightMoveInAnimation.cs" />
+    <Compile Include="Animation\TransformEventArgs.cs" />
+    <Compile Include="Animation\TranslateAnimation.cs" />
+    <Compile Include="Animation\TrembleAnimation.cs" />
+    <Compile Include="Animation\TurnIntoAnimation.cs" />
+    <Compile Include="Animation\WaveAnimation.cs" />
+    <Compile Include="Animation\ZoomInOutAnimation.cs" />
+    <Compile Include="BrushTool.cs" />
+    <Compile Include="Config\AnimationConfig.cs" />
+    <Compile Include="Gif\AnimatedGifEncoder.cs" />
+    <Compile Include="Gif\GifDecoder.cs" />
+    <Compile Include="Gif\LZWEncoder.cs" />
+    <Compile Include="Gif\NeuQuant.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Res\bg1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\bg2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\bg3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\bg4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\frog1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\frog2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\frog3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\frog4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\frog5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_0.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_10.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_11.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_12.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_13.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_14.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_15.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_16.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_17.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_18.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_19.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_4.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_5.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_6.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_7.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_8.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\neon_bg\neon_gif_9.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

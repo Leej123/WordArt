@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define _ACTIVEX
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -240,10 +241,68 @@ namespace WordArt
             AnimationConfig.Text = text;
         }
 
+        /// <summary>
+        /// 是否使用gif图片作为最终结果
+        /// </summary>
+        /// <param name="enable"></param>
         public void UseGifAsResult(bool enable)
         {
             AnimationConfig.IsUseGif = enable;
         }
+
+        /// <summary>
+        /// 使用gif时，设置bmp保存的目录，已经保存的文件名。
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="name"></param>
+        public void SetBitmapSavePath(string path, string name)
+        {
+            if (path != null && path.Length > 0) AnimationConfig.BitmapSavePath = path;
+            if (name != null && name.Length > 0) AnimationConfig.BitmapSaveName = name;
+        }
+
+        ///////单个设置文字的字体/////////
+        /// <summary>
+        /// 清除文字的字体设置
+        /// </summary>
+        public void ClearFont()
+        {
+            AnimationConfig.FontTable.Clear();
+        }
+
+        /// <summary>
+        /// 设置从开始位置到结束位置文字的字体
+        /// </summary>
+        /// <param name="beginIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <param name="fontName"></param>
+        /// <param name="emsize"></param>
+        /// <param name="bold"></param>
+        /// <param name="italic"></param>
+        /// <param name="underline"></param>
+        public void SetTextFont(int beginIndex, int endIndex, string fontName, int emsize, bool bold, bool italic, bool underline)
+        {
+            FontStyle style = FontStyle.Regular;
+            if (bold) style |= FontStyle.Bold;
+            if (italic) style |= FontStyle.Italic;
+            if (underline) style |= FontStyle.Underline;
+            if (emsize < 9) emsize = 9;
+            Font font = new Font(new FontFamily(fontName), emsize, style, GraphicsUnit.Pixel);
+            for (int i = beginIndex; i <= endIndex; i++)
+            {
+                if (!AnimationConfig.FontTable.ContainsKey(i))
+                    AnimationConfig.FontTable.Add(i, font);
+                else
+                    AnimationConfig.FontTable[i] = font;
+            }
+        }
+
+        public long GetAnimateCycleTime() 
+        {
+            return AnimationConfig.AnimateCycleTime;
+        }
+
+
         #endregion
 
         public void SetDrawEvent(DrawEvent drawEvent)
@@ -262,8 +321,10 @@ namespace WordArt
 
             Font font = new Font(AnimationConfig.FontFamily, AnimationConfig.EmSize, AnimationConfig.FontStyle, GraphicsUnit.Pixel);
             AnimationConfig.Font = font;
+            animStr.Dispose();
             animStr.CreateAnimation(null);
             isBegin = true;
+            drawEnd = false;
             return true;
         }
 
@@ -288,6 +349,7 @@ namespace WordArt
             if (null != userDrawEvent)
                 animStr.DrawBitmap -= userDrawEvent;
             isBegin = false;
+            drawEnd = false;
         }
 
         private void DrawBitmap(object sender, DrawEventArgs args)
@@ -295,7 +357,7 @@ namespace WordArt
             drawEnd = true;
             isBegin = false;
         }
-
+#if _ACTIVEX
         #region 实现IObjectSafety接口
         private const string _IID_IDispatch = "{00020400-0000-0000-C000-000000000046}";
         private const string _IID_IDispatchEx = "{a6ef9860-c720-11d0-9337-00a0c90dcaa9}";
@@ -369,5 +431,6 @@ namespace WordArt
         }
 
         #endregion
+#endif
     }
 }

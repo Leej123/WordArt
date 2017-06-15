@@ -41,7 +41,7 @@ namespace WordArt
             }
         }
 
-        public int GetBitmapData(byte[] data)
+        public int GetBitmapData(Byte[] data)
         {
             if (null == bitmap || data == null)
                 return 0;
@@ -148,6 +148,10 @@ namespace WordArt
         /// </summary>
         private Region region = new Region();
 
+        private Object disposeObj = new Object();
+
+        private BitmapTool bmpTool;
+
         /// <summary>
         /// 根据动画配置创建文本动画。
         /// </summary>
@@ -169,41 +173,44 @@ namespace WordArt
                 animator = null;
             }
 
-            if (gifDecoder != null)
-            {
-                int size = gifDecoder.GetFrameCount();
-                for (int i = 0; i < size; i++)
+            //lock (disposeObj)
+            //{
+                if (gifDecoder != null)
                 {
-                    gifDecoder.GetFrame(i).Dispose();
+                    int size = gifDecoder.GetFrameCount();
+                    for (int i = 0; i < size; i++)
+                    {
+                        gifDecoder.GetFrame(i).Dispose();
+                    }
+                    gifDecoder = null;
                 }
-                gifDecoder = null;
-            }
 
-            if (gifEncoder != null)
-            {
-                gifEncoder.Finish();
-                isStart = false;
-                gifEncoder = null;
-            }
+                if (gifEncoder != null)
+                {
+                    gifEncoder.Finish();
+                    isStart = false;
+                    gifEncoder = null;
+                }
 
-            if (brushTool != null)
-            {
-                brushTool.Dispose();
-                brushTool = null;
-            }
+                if (brushTool != null)
+                {
+                    brushTool.Dispose();
+                    brushTool = null;
+                }
 
-            if (bitmap != null)
-            {
-                isDisposed = true;
-                bitmap.Dispose();
-                bitmap = null;
-            }
+                if (bitmap != null)
+                {
+                    isDisposed = true;
+                    bitmap.Dispose();
+                    bitmap = null;
+                }
 
-            if (nenoGifImg != null)
-            {
-                nenoGifImg.Dispose();
-                nenoGifImg = null;
-            }
+                if (nenoGifImg != null)
+                {
+                    nenoGifImg.Dispose();
+                    nenoGifImg = null;
+                }
+            //}
         }
 
         /// <summary>
@@ -232,13 +239,14 @@ namespace WordArt
             }
             
             //List<AnimationChar> chars = new List<AnimationChar>();
-
+            // 创建位图
             bitmap = new Bitmap(AnimationConfig.Width, AnimationConfig.Height);
             isDisposed = false;
             g = Graphics.FromImage(bitmap);
             g.TextRenderingHint = textRenderingHint;
             g.SmoothingMode = smoothingMode;
 
+            // 动画创建工厂
             //SetAnimation(g);
             if (animationFactory == null)
                 animationFactory = new AnimationFactory(g);
@@ -246,16 +254,27 @@ namespace WordArt
                 animationFactory.Graphiscs = g;
 
             isParallelAnimation = false;
-            screens = animationFactory.CreateAnimationChars(ref isParallelAnimation);
+            screens = animationFactory.CreateAnimationChars(ref isParallelAnimation);// 创建动画
             screenindex = 0;
 
+            // 动画执行器
             animator = new StringAnimator(config, isParallelAnimation);
             animator.Screens = screens;
             animator.Transformed += TransformedEvent;
-            animator.Start();
 
+            //gif 编码器。用于生产gif图片
             gifEncoder = new AnimatedGifEncoder();
-            gifEncoder.SetDelay(StringAnimator.TIME_INTERVAL);
+            if (AnimationConfig.IsUseGif)
+            {
+                int delay = (int)(100 / AnimationConfig.AnimationSpeedFactor);
+                //if (delay > 500) delay = 500;
+                //if (delay < 20) delay = 20;
+                gifEncoder.SetDelay(delay);
+            }
+            else
+            {
+                gifEncoder.SetDelay(StringAnimator.TIME_INTERVAL);
+            }
             gifEncoder.SetRepeat(0);
 
             if (frog == null)
@@ -275,9 +294,11 @@ namespace WordArt
             }
             frogIndex = 0;
 
+            // 笔刷工具
             brushTool = new BrushTool();
             brushTool.InitBrush();
 
+            // 获取霓虹背景
             if (AnimationConfig.NeonBackgroundEnabled && AnimationConfig.NenoBackgroundPath.Length > 0)
             {
                 //NenoGifPath = AnimationConfig.NenoBackgroundPath;
@@ -298,31 +319,63 @@ namespace WordArt
                 nenoGifImg = null;
                 gifFrameIndex = -1;
             }
+
+            // 位图保存工具
+            if (AnimationConfig.IsUseGif)
+            {
+                if (bmpTool == null) bmpTool = new BitmapTool();
+                else bmpTool.Reset();
+            }
+
+            //开始
+            animator.Start();
         }
 
         private bool isStart = false;
+        private int totalBmp = 0;
         private void TransformedEvent(object sender, TransformEventArgs args)
         { 
             lock (obj)
             {
                 this.screenindex = args.ScreenIndex;
             }
-            drawBitmap();
+            bool draw = drawBitmap();
+
+            if (args.State == TransformEventArgs.BEGIN) 
+            {
+                AnimationConfig.AnimateCycleTime = 0;
+                totalBmp = 0;
+                totalBmp ++;
+            }
+            else if (args.State == TransformEventArgs.RUNNING) 
+            {
+                totalBmp++;
+            }
+            else
+            {
+                int delay = (int)(100 / AnimationConfig.AnimationSpeedFactor);
+                AnimationConfig.AnimateCycleTime = delay * totalBmp;
+            }
+
             if (AnimationConfig.IsUseGif)
             {
                 if (args.State == TransformEventArgs.BEGIN)
                 {
-                    gifEncoder.Start("./test.gif");
+                    String gifFile = AnimationConfig.BitmapSavePath + "/" + AnimationConfig.BitmapSaveName + ".gif";
+                    gifEncoder.Start(gifFile);
                     gifEncoder.AddFrame(bitmap);
                     isStart = true;
+                    if (draw) bmpTool.SaveBitmap(screenindex, bitmap);
                 }
                 else if (args.State == TransformEventArgs.RUNNING)
                 {
                     gifEncoder.AddFrame(bitmap);
+                    if (draw) bmpTool.SaveBitmap(screenindex, bitmap);
                 }
                 else if (args.State == TransformEventArgs.END)
                 {
                     gifEncoder.Finish();
+                    //if (bmpTool != null) bmpTool.SaveGif();
                     isStart = false;
                     if (DrawBitmap != null && !isDisposed)
                     {
@@ -332,7 +385,7 @@ namespace WordArt
                 else
                 {
                     if (isStart)
-                        gifEncoder.Finish();
+                        gifEncoder.Finish();//if (bmpTool != null) bmpTool.SaveGif();
                     isStart = false;
                 }
             }
@@ -345,7 +398,7 @@ namespace WordArt
             }
         }
 
-        private void drawBitmap()
+        private bool drawBitmap()
         {
             //g.TextRenderingHint = textRenderingHint;
             //g.SmoothingMode = smoothingMode;
@@ -361,13 +414,25 @@ namespace WordArt
                 //gifFrameIndex++;
                 //if (gifFrameIndex >= gifDecoder.GetFrameCount())
                 //    gifFrameIndex = 0;
-                if (nenoGifImg != null)
+              
+                if (nenoGifImg != null && g != null)
                 {
-                    nenoGifImg.SelectActiveFrame(fd, gifFrameIndex);
-                    g.DrawImage(nenoGifImg, 0, 0, AnimationConfig.Width, AnimationConfig.Height);
-                    gifFrameIndex++;
-                    if (gifFrameIndex >= nenoGifImg.GetFrameCount(fd))
-                        gifFrameIndex = 0;
+                    try
+                    {
+                        nenoGifImg.SelectActiveFrame(fd, gifFrameIndex);
+                        g.DrawImage(nenoGifImg, 0, 0, AnimationConfig.Width, AnimationConfig.Height);
+                        gifFrameIndex++;
+                        if (gifFrameIndex >= nenoGifImg.GetFrameCount(fd))
+                            gifFrameIndex = 0;
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        return false;
+                    }
+                    catch (NullReferenceException)
+                    {
+                        return false;
+                    }
                 }
             }
 
@@ -378,7 +443,7 @@ namespace WordArt
             }
 
             if (idx >= screens.Count)
-                return;
+                return false;
 
             Brush brush = brushTool.Brush;
             Pen pen = brushTool.Pen;
@@ -432,7 +497,8 @@ namespace WordArt
             //{
             //    DrawBitmap(this, new DrawEventArgs(b));
             //}
-            
+
+            return true;
         }
     }
 }

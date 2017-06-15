@@ -51,15 +51,23 @@ namespace WordArt.Animation
         /// <summary>
         /// 创建一个动画字符。每个字符具有的字体，字体样式，以及动画都有可能不同。
         /// </summary>
+        /// <param name="index"></param>
         /// <param name="character"></param>
         /// <param name="g"></param>
         /// <returns></returns>
-        public static AnimationChar CreatAnimationChar(string character, Graphics g)
+        public static AnimationChar CreatAnimationChar(int index, string character, Graphics g)
         {
             AnimationChar animChar = new AnimationChar(character);
-            animChar.Font = AnimationConfig.Font;
+            animChar.Font = GetFontByIndex(index);
             animChar.Size = g.MeasureString(character, animChar.Font, new Point(0, 0), StringFormat.GenericTypographic);
             return animChar;
+        }
+
+        public static Font GetFontByIndex(int index)
+        {
+            if (AnimationConfig.FontTable.ContainsKey(index))
+                return AnimationConfig.FontTable[index];
+            return AnimationConfig.Font;
         }
     }
 }

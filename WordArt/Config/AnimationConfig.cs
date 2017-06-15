@@ -16,7 +16,7 @@ namespace WordArt.Config
         /// <summary>
         /// 动画字使用的字体
         /// </summary>
-        public static Font Font;
+        public static Font Font = new Font(new FontFamily("宋体"), 9, FontStyle.Regular, GraphicsUnit.Pixel);
 
         /// <summary>
         /// 字头簇名
@@ -73,7 +73,7 @@ namespace WordArt.Config
         /// <summary>
         /// 每屏停留的时间，设置为100ms的倍数
         /// </summary>
-        public static int ResidenceTime = 1000;
+        public static int ResidenceTime = 100;
 
         /// <summary>
         /// 动画速度
@@ -124,5 +124,35 @@ namespace WordArt.Config
         /// 是否使用GIF作为最终的结果
         /// </summary>
         public static bool IsUseGif = true;
+
+        /// <summary>
+        /// 在没设置炫彩时起作用
+        /// </summary>
+        public static Color TextColor = Color.Blue;
+
+        /// <summary>
+        /// 需要显示的文本
+        /// </summary>
+        public static List<TextEntity> TextList = new List<TextEntity>();
+
+        /// <summary>
+        /// 显示文本的字体
+        /// </summary>
+        public static Dictionary<int, Font> FontTable = new Dictionary<int, Font>();
+
+        /// <summary>
+        /// bmp保存的路径
+        /// </summary>
+        public static string BitmapSavePath = "./";
+
+        /// <summary>
+        /// bmp保存的名字
+        /// </summary>
+        public static string BitmapSaveName = "test";
+
+        /// <summary>
+        /// 动画循环时间（ms）
+        /// </summary>
+        public static long AnimateCycleTime = 0;
     }
 }

@@ -48,9 +48,10 @@ namespace WordArt
             blend.Positions = positions;
             blend.Colors = colors;
 
-            if (!AnimationConfig.ColorfulEnabled)//炫彩为选中
+            if (!AnimationConfig.ColorfulEnabled)//炫彩未选中
             {
-                brush = Brushes.White;
+                //brush = Brushes.White;
+                brush = new SolidBrush(AnimationConfig.TextColor);
                 pen = new Pen(brush);
                 return;
             }
@@ -91,7 +92,8 @@ namespace WordArt
                 }
                 else
                 {
-                    brush = Brushes.White;
+                    //brush = Brushes.White;
+                    brush = new SolidBrush(AnimationConfig.TextColor);
                     pen = new Pen(brush);   
                 }
             }

@@ -186,7 +186,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -239,7 +239,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -291,7 +291,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -341,7 +341,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -397,7 +397,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -456,7 +456,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -516,7 +516,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -567,7 +567,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -619,7 +619,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -669,7 +669,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -720,7 +720,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -775,7 +775,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -841,7 +841,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -901,7 +901,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -998,7 +998,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -1067,7 +1067,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -1161,7 +1161,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -1236,7 +1236,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -1345,7 +1345,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -1466,7 +1466,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -1548,7 +1548,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; i++)
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 if (length + charWidth > AnimationConfig.Width) //需要分屏
                 {
@@ -1597,7 +1597,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; )
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 ///////////////////////////////////////////
                 //计算与字体相关的参数
@@ -1671,7 +1671,7 @@ namespace WordArt.Animation
             for (int i = textSize - 1; i >= 0; )
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 ///////////////////////////////////////////
                 //计算与字体相关的参数
@@ -1745,7 +1745,7 @@ namespace WordArt.Animation
             for (int i = textSize - 1; i >= 0; )
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 ///////////////////////////////////////////
                 //计算与字体相关的参数
@@ -1817,7 +1817,7 @@ namespace WordArt.Animation
             for (int i = 0; i < textSize; )
             {
                 string character = text.Substring(i, 1);
-                AnimationChar animChar = AnimationUtil.CreatAnimationChar(character, g);
+                AnimationChar animChar = AnimationUtil.CreatAnimationChar(i, character, g);
                 charWidth = Convert.ToInt32(animChar.Size.Width);
                 ///////////////////////////////////////////
                 //计算与字体相关的参数

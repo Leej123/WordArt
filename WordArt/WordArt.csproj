@@ -44,7 +44,9 @@
   <ItemGroup>
     <Compile Include="AnimationChar.cs" />
     <Compile Include="AnimationString.cs" />
+    <Compile Include="BitmapTool.cs" />
     <Compile Include="IObjectSafety.cs" />
+    <Compile Include="TextEntity.cs" />
     <Compile Include="WordArtApi.cs" />
     <Compile Include="Animation\AnimationFactory.cs" />
     <Compile Include="Animation\AnimationType.cs" />

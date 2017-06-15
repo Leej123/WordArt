@@ -10,9 +10,9 @@ using System.Security;
 [assembly: AssemblyTitle("WordArt")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("深圳市励研科技有限公司")]
 [assembly: AssemblyProduct("WordArt")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCopyright("深圳市励研科技有限公司 ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

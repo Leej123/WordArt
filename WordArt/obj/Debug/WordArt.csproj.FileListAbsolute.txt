@@ -29,6 +29,7 @@ E:\VSPro\WordArt\WordArt\bin\Debug\Res\neon_bg\neon_gif_9.gif
 E:\VSPro\WordArt\WordArt\bin\Debug\Res\frog1.png
 E:\VSPro\WordArt\WordArt\bin\Debug\WordArt.dll
 E:\VSPro\WordArt\WordArt\bin\Debug\WordArt.pdb
+E:\VSPro\WordArt\WordArt\bin\Debug\WordArt.tlb
+E:\VSPro\WordArt\WordArt\obj\Debug\WordArt.csprojResolveAssemblyReference.cache
 E:\VSPro\WordArt\WordArt\obj\Debug\WordArt.dll
 E:\VSPro\WordArt\WordArt\obj\Debug\WordArt.pdb
-E:\VSPro\WordArt\WordArt\bin\Debug\WordArt.tlb

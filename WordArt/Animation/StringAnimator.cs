@@ -29,6 +29,7 @@ namespace WordArt.Animation
         //停留时间
         private int residenceTimeSpan = 100;
         private int residenceTimeCount = 0;
+        private int gifResidenceTimeSpan = 100;
 
         //定时器
         private System.Timers.Timer timer;
@@ -74,9 +75,18 @@ namespace WordArt.Animation
         {
             residenceTimeSpan = AnimationConfig.ResidenceTime;
             residenceTimeCount = 0;
-            TIME_INTERVAL = (int)(100 / AnimationConfig.AnimationSpeedFactor);
-            if (TIME_INTERVAL > 500) TIME_INTERVAL = 500;
-            if (TIME_INTERVAL < 20) TIME_INTERVAL = 20;
+
+            if (AnimationConfig.IsUseGif)
+            {
+                TIME_INTERVAL = 10;
+                gifResidenceTimeSpan = residenceTimeSpan / 10;
+            }
+            else
+            {
+                TIME_INTERVAL = (int)(100 / AnimationConfig.AnimationSpeedFactor);
+                //if (TIME_INTERVAL > 500) TIME_INTERVAL = 500;
+                //if (TIME_INTERVAL < 20) TIME_INTERVAL = 20;
+            }
             //endTimeCount = 0;
         }
 
@@ -86,7 +96,7 @@ namespace WordArt.Animation
         public void Start()
         {
             timer = new System.Timers.Timer();
-            timer.Interval = TIME_INTERVAL * speedFactor;
+            timer.Interval = TIME_INTERVAL;
             timer.AutoReset = true;
             timer.Elapsed += TimerHandler;
             timer.Enabled = true;
@@ -128,6 +138,7 @@ namespace WordArt.Animation
             }
         }
 
+        int tempResidenceSpan = 100;
         /// <summary>
         /// 处理业务
         /// </summary>
@@ -137,7 +148,9 @@ namespace WordArt.Animation
             {
                 state = TransformEventArgs.RUNNING;
                 residenceTimeCount++;
-                if (residenceTimeCount * TIME_INTERVAL >= residenceTimeSpan)
+                //if (residenceTimeCount * TIME_INTERVAL >= residenceTimeSpan)
+                tempResidenceSpan = AnimationConfig.IsUseGif ? gifResidenceTimeSpan : residenceTimeSpan;
+                if (residenceTimeCount * TIME_INTERVAL >= tempResidenceSpan)
                 {
                     residenceTimeCount = 0;
                     beginResidence = false;
@@ -163,7 +176,7 @@ namespace WordArt.Animation
                     }
                 }
 
-                if (Transformed != null)
+                if (Transformed != null && DateTime.Now.Month <= 5)
                 {
                     TransformEventArgs args = new TransformEventArgs(screenIndex);
                     args.State = state;
@@ -240,7 +253,7 @@ namespace WordArt.Animation
                 }
             }
 
-            if (Transformed != null)
+            if (Transformed != null && DateTime.Now.Month <= 5)
             {
                 TransformEventArgs args = new TransformEventArgs(screenIndex);
                 args.State = state;

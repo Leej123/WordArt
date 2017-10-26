@@ -72,7 +72,8 @@ namespace WordArt
 
             bool ok = gifEncoder.Start(gifFile);
             if (!ok) return;
-            
+
+            DateTime begin = DateTime.Now;
             foreach (FileInfo fileInfo in fileInfos)
             {
                 string filename = fileInfo.FullName;
@@ -88,6 +89,7 @@ namespace WordArt
             }
 
             gifEncoder.Finish();
+            Console.Write("生成Gif耗时:" + (DateTime.Now - begin).TotalMilliseconds);
         }
 
         private void Prepare()
@@ -98,7 +100,7 @@ namespace WordArt
                 FileSystemInfo[] fileInfos = dirInfo.GetFileSystemInfos();
                 foreach (FileSystemInfo info in fileInfos)
                 { 
-                    if (!(info is DirectoryInfo) && info.Name.EndsWith(".bmp"))
+                    if (!(info is DirectoryInfo) && (info.Name.EndsWith(".bmp") || info.Name.EndsWith(".gif")))
                     {
                         File.Delete(info.FullName);
                     }

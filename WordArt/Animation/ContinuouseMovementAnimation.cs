@@ -122,7 +122,7 @@ namespace WordArt.Animation
             }
 
             isEnd = false;
-            if (count == 5)
+            if (count == 2) // 连续动画，无结束条件，在使用gif动画时。给定重复次数为结束条件。
             {
                 isEnd = true;
             }

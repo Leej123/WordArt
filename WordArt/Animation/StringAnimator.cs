@@ -47,6 +47,10 @@ namespace WordArt.Animation
         /// </summary>
         //private int endTimeCount = 0;
 
+
+        private Thread thread = null;
+        private bool isDone = false;
+
         public StringAnimator(AnimationConfig config, bool isParallelAnimation = false)
         {
             UpdateAnimationConfig(config);
@@ -95,12 +99,19 @@ namespace WordArt.Animation
         /// </summary>
         public void Start()
         {
-            timer = new System.Timers.Timer();
-            timer.Interval = TIME_INTERVAL;
-            timer.AutoReset = true;
-            timer.Elapsed += TimerHandler;
-            timer.Enabled = true;
-            //endTimeCount = 0;
+            if (AnimationConfig.IsUseGif)
+            {
+                StartThread();
+            }
+            else
+            {
+                timer = new System.Timers.Timer();
+                timer.Interval = TIME_INTERVAL;
+                timer.AutoReset = true;
+                timer.Elapsed += TimerHandler;
+                timer.Enabled = true;
+                //endTimeCount = 0;
+            }
         }
 
         /// <summary>
@@ -108,10 +119,22 @@ namespace WordArt.Animation
         /// </summary>
         public void Stop()
         {
-            timer.Enabled = false;
-            timer.Close();
-            timer = null;
-            //endTimeCount = 0;
+            if (AnimationConfig.IsUseGif)
+            {
+                isDone = true;
+                if (thread != null)
+                {
+                    thread.Join(10);
+                    thread = null;
+                }
+            }
+            else
+            {
+                timer.Enabled = false;
+                timer.Close();
+                timer = null;
+                //endTimeCount = 0;
+            }
         }
 
         /// <summary>
@@ -137,6 +160,26 @@ namespace WordArt.Animation
                 Interlocked.Exchange(ref inTimerHandler, 0);
             }
         }
+
+        private void StartThread()
+        {
+            isDone = false;
+            thread = new Thread(ThreadProc);
+            thread.Start();
+        }
+
+        private void ThreadProc()
+        {
+            while (!isDone)
+            {
+                HandleTimeElapsed();
+                if (state == TransformEventArgs.END)
+                {
+                    isDone = true;
+                }
+            }
+        }
+
 
         int tempResidenceSpan = 100;
         /// <summary>
@@ -176,7 +219,7 @@ namespace WordArt.Animation
                     }
                 }
 
-                if (Transformed != null && DateTime.Now.Month <= 5)
+                if (Transformed != null) //&& DateTime.Now.Month <= 11)
                 {
                     TransformEventArgs args = new TransformEventArgs(screenIndex);
                     args.State = state;
@@ -253,7 +296,7 @@ namespace WordArt.Animation
                 }
             }
 
-            if (Transformed != null && DateTime.Now.Month <= 5)
+            if (Transformed != null) //&& DateTime.Now.Month <= 11)
             {
                 TransformEventArgs args = new TransformEventArgs(screenIndex);
                 args.State = state;

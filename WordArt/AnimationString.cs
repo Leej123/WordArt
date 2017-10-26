@@ -471,25 +471,46 @@ namespace WordArt
             {
                 LinkedList<AnimationChar> chars = screens[idx];
                 LinkedListNode<AnimationChar> node = chars.First;
-                region.MakeEmpty();
-                while (node != null)
+                if (AnimationConfig.IsFillMode)
                 {
-                    //node.Value.Draw(brush, pen, g);
-                    region.Xor(node.Value.GetDrawPath());
-                    if (isParallelAnimation)
+                    region.MakeEmpty();
+                    while (node != null)
                     {
-                        node = node.Next;
+                        //node.Value.Draw(brush, pen, g);
+                        region.Xor(node.Value.GetDrawPath());
+                        if (isParallelAnimation)
+                        {
+                            node = node.Next;
+                        }
+                        else
+                        {
+                            bool end = node.Value.Animation.IsAnimationEnd();
+                            if (!end)
+                                break;
+                            node = node.Next;
+                        }
                     }
-                    else
+
+                    g.FillRegion(brush, region);
+                }
+                else
+                {
+                    while (node != null)
                     {
-                        bool end = node.Value.Animation.IsAnimationEnd();
-                        if (!end)
-                            break;
-                        node = node.Next;
+                        node.Value.Draw(brush, new Pen(brush), g);
+                        if (isParallelAnimation)
+                        {
+                            node = node.Next;
+                        }
+                        else
+                        {
+                            bool end = node.Value.Animation.IsAnimationEnd();
+                            if (!end)
+                                break;
+                            node = node.Next;
+                        }
                     }
                 }
-
-                g.FillRegion(brush, region);
             }
 
             //Bitmap b = new Bitmap(bitmap);

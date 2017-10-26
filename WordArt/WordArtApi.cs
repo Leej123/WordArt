@@ -242,6 +242,17 @@ namespace WordArt
         }
 
         /// <summary>
+        /// 设置字体颜色，只有在不使用炫彩功能时有用。默认蓝色。
+        /// </summary>
+        /// <param name="red"></param> 0-255
+        /// <param name="green"></param> 0-255
+        /// <param name="blue"></param> 0-255
+        public void SetTextColor(int red, int green, int blue) 
+        {
+            AnimationConfig.TextColor = Color.FromArgb(red, green, blue);
+        }
+
+        /// <summary>
         /// 是否使用gif图片作为最终结果
         /// </summary>
         /// <param name="enable"></param>
